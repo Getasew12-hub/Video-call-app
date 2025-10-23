@@ -12,7 +12,9 @@ const app=express();
 
 const port =5000;
 
-
+app.get("/",(req,res)=>{
+    res.send("hellow this is video calling app")
+})
 app.use(express.urlencoded({extended:true}));
 app.use(express.json())
 app.use(cookieParser())
