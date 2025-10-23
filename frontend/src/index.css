@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.authbutton{
+    @apply p-2 rounded-md bg-sky-500 bg-opacity-10 flex gap-2 items-center hover:bg-opacity-20
+}
+.authbuttonicon{
+    @apply flex justify-center items-center h-10 w-10 rounded-full  bg-gray-500 bg-opacity-50 text-3xl
+}
+
+.imageanimate{
+       animation: bounce 2s linear 0.5s infinite  alternate-reverse ;
+}
+
+
+     @keyframes bounce {
+        from{
+           transform: translateY(0);
+        }
+        to{
+ transform: translateY(-80px);
+        }
+      }
