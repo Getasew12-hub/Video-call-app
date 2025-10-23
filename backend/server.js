@@ -42,3 +42,5 @@ try {
 
 
 conncetServer()
+
+export default app;
