@@ -3,6 +3,8 @@ import GoogleStrategy from "passport-google-oauth20";
 import express from "express";
 import { ENV } from "../config/environment.js";
 import user from "../model/user.js";
+import jwt from "jsonwebtoken"
+import { userupsert } from "../config/strem.js";
 
 const router=express.Router();
 
@@ -23,10 +25,12 @@ router.get("/google/callback",passport.authenticate('google',{
     callbackURL: "http://localhost:5000/api/authgoogle/google/callback"
   },
   async function(accessToken, refreshToken, profile, cb) {
- 
-const getuser=await  user.findOne({email:profile.email[0].value});
+  console.log(profile)
+const getuser=await  user.findOne({email:profile.emails[0].value});
 if(!getuser){
-    const newuser=await user.create({name:profile.name,email:profile.email[0].value,password:'google'});
+    const newuser=await user.create({name:profile.displayName,email:profile.emails[0].value,password:'google'});
+    const userdata={name:newuser.name,id:newuser._id}
+    await userupsert(userdata)
   
     return cb(null,newuser)
 }else{
