@@ -24,7 +24,21 @@ app.use(passport.initialize())
 app.use("/api/auth",authRouter);
 app.use("/api/authgoogle",authgoogleRouter)
 app.use("/api/chat",chatRouter)
-app.listen(ENV.PORT,()=>{
-    console.log("your server rinnign on port:",ENV.PORT);
-    monogdb()
-})
+const conncetServer=()=>{
+try {
+    
+    if(ENV.NODE_ENV=='development'){
+    
+        app.listen(ENV.PORT,()=>{
+            console.log("your server rinnign on port:",ENV.PORT);
+            monogdb()
+        })
+    }
+} catch (error) {
+  console.log('error on serve connection')  
+  process.exit(1)
+}
+}
+
+
+conncetServer()
