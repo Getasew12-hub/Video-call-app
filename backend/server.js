@@ -24,9 +24,8 @@ app.use(passport.initialize())
 app.use("/api/auth",authRouter);
 app.use("/api/authgoogle",authgoogleRouter)
 app.use("/api/chat",chatRouter)
-const conncetServer= async()=>{
-    await monogdb()
-try {
+ monogdb()
+
     
     if(ENV.NODE_ENV=='development'){
     
@@ -35,13 +34,6 @@ try {
            
         })
     }
-} catch (error) {
-  console.log('error on serve connection')  
-  process.exit(1)
-}
-}
 
-
-conncetServer()
 
 export default app;
