@@ -25,7 +25,7 @@ router.get("/google/callback",passport.authenticate('google',{
     callbackURL: "http://localhost:5000/api/authgoogle/google/callback"
   },
   async function(accessToken, refreshToken, profile, cb) {
-  console.log(profile)
+  
 const getuser=await  user.findOne({email:profile.emails[0].value});
 if(!getuser){
     const newuser=await user.create({name:profile.displayName,email:profile.emails[0].value,password:'google'});
