@@ -16,7 +16,7 @@ export const Protectedroute=async (req,res,next) => {
        if(!getuser) return res.status(401).json({error:'Unautorized'});
 
        req.user=getuser;
-   console.log(req.user)
+  
        next()
         
     } catch (error) {

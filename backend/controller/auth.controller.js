@@ -81,6 +81,7 @@ export const Login=async (req,res) => {
     }
 }
 export const Logout=async (req,res) => {
+  console.log("now i work and you do't needd call me agia")
     try {
          res.clearCookie("token");
          return res.status(200).json({message:'success'})
