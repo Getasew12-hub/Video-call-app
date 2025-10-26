@@ -4,7 +4,7 @@ import axios from "../lib/axios"
 import {useNavigate, useSearchParams} from "react-router-dom"
 import { useStreamChat } from '../hook/useStreamChat';
 import "../style/style.css"
-
+import ChannelPreview from "../componets/channalpreview"
 import {
   Chat,
   Channel,
@@ -19,6 +19,7 @@ import {
 import { GetAuthuser } from '../lib/api';
 import { Plus } from 'lucide-react';
 import CreateChannel from '../componets/CreateChannel';
+import DirectMessagign from '../componets/DirectMessagign';
 
 
 function HomePage() {
@@ -29,15 +30,16 @@ const [searchParams,setSearchParams]=useSearchParams();
 const {streamClient,isLoading,error}=useStreamChat();
 
 
-console.log("the strema is contian this thing and it must work as expected",streamClient)
+
 useEffect(()=>{
 if(streamClient){
   
     const channelid=searchParams.get("channel");
+    console.log("the channel user is this ",channelid)
     if(channelid){
       const channel= streamClient.channel('messages',channelid);
-       console.log("i get this channal and your work on this",channel)
-      setActiveChannel(channel);
+       console.log("the channek response in side channel id is this so you must like it",channel.DirectMessagign)
+      setActiveChannel(channel.id);
     }
   }
 },[searchParams,streamClient])
@@ -50,7 +52,7 @@ if(error) return <p className='text-black'>Something went wrong</p>;  return (
       <div className='  flex-grow  rounded-xl shadow-md shadow-gray-700 flex  overflow-hidden  '>
         <Chat client={streamClient}>
     {/* lefs side bar */}
-    <div className=' p-3  bg-gradient-to-b from-purple-800  to-purple-950 min-h-screen'>
+    <div className=' p-3  bg-gradient-to-b from-purple-800  to-purple-950 min-h-screen max-w-96'>
       
          <div className='flex justify-between items-center gap-5'>
           <div className='flex items-center gap-2 '>
@@ -71,13 +73,44 @@ if(error) return <p className='text-black'>Something went wrong</p>;  return (
 
            {/*to to get  channales */}
 
-           <div></div>
+           <div>
+                 <ChannelList
+                  filters={{members:{$in:[streamClient.user.id]}}}
+                   Preview={({channel})=>(
+                    <ChannelPreview channel={channel} activechannel={activechannel} setActiveChannel={(channel)=> setActiveChannel(channel)}  setSearchParams={(channel)=> setSearchParams({channel:channel})}/>
+                   )}
+                   List={({children,loading,error})=>
+                    <div className='space-y-5 mt-6'>
+                      <div className='space-y-5 h-[45vh]'>
+                      <div className='uppercase font-bold  p-3 bg-purple-950 shadow-sm shadow-gray-900 '>
+                        channels
+                      </div>
+                    {loading ? <p>Loading..</p>:
+                     <div className='space-y-4'>
+
+                       {children}
+                      </div>}
+                      </div>
+
+                      <div className='space-y-3'>
+                         <div className='uppercase font-bold  p-3 bg-purple-950 shadow-sm shadow-gray-900 '>
+                        direct message
+                      </div>
+                        <DirectMessagign activechannel={activechannel} setActiveChannel={(channel)=> setActiveChannel(channel)}/>
+                      </div>
+                    </div>
+                   }
+                
+                />
+
+                 
+           </div>
 
 
        
     </div>
     {/* right side bar */}
-    <div className='bg-white flex-grow '>
+    <div className='bg-white flex-grow  border-2 border-red-600'>
        <Channel channel={activechannel}>
         <Window>
         <MessageList/>

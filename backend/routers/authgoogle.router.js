@@ -4,7 +4,7 @@ import express from "express";
 import { ENV } from "../config/environment.js";
 import user from "../model/user.js";
 import jwt from "jsonwebtoken"
-import { userupsert } from "../config/strem.js";
+import { Addnewmember, userupsert } from "../config/strem.js";
 
 const router=express.Router();
 
@@ -32,7 +32,7 @@ if(!getuser){
     const newuser=await user.create({name:profile.displayName,email:profile.emails[0].value,password:'google',img:profile.photos[0].value});
     const userdata={name:newuser.name,id:newuser._id,img:profile.photos[0].value}
     await userupsert(userdata)
-  
+    await Addnewmember(newuser._id);
     return cb(null,newuser)
 }else{
     return cb(null,getuser)

@@ -20,7 +20,7 @@ function CreateChannel({onCose,setActiveChannel}) {
 
 
 const {client} =useChatContext()
-console.log("the client is this and work propery",client)
+
 
   useEffect(()=>{
     if(!client?.user) return;
@@ -45,9 +45,9 @@ console.log("the client is this and work propery",client)
      setchannelData((pre)=>{
       return{
         ...pre,
-        [name]:value.trimStart(),
+        [name]:value,
       }
-     })
+     });
   }
 
   function togglemembers(id){
@@ -72,8 +72,8 @@ setiscreating(true)
 
  const channaleformat={
   name:channalData.name,
-  created_by_id:client?.user?._id,
-  members:selectedmembers,
+  created_by_id:client?.user?.id,
+  members:[...selectedmembers,client.user.id],
   channelType:channalData.channelType,
  }
 
@@ -122,7 +122,7 @@ setiscreating(true)
       <div className='max-h-[450px] overflow-y-auto scrollbar space-y-4'>
              <div>
               <label >Channel name</label>
-              <input type="text" name="name" maxLength={20} placeholder='e.g markating'  className='w-full rounded p-2 bg-transparent bg-orange-700  bg-opacity-50 outline-none  shadow-sm shadow-gray-700' onChange={ChangeHandler} value={channalData.name}/>
+              <input type="text" name="name" maxLength={20} placeholder='e.g markating'  className='w-full rounded p-2 bg-transparent bg-orange-600  bg-opacity-50 outline-none  shadow-sm shadow-gray-700' onChange={ChangeHandler} value={channalData.name}/>
              </div>
              {/* preview */}
 
@@ -179,7 +179,7 @@ setiscreating(true)
 
                     <div>
                       <label  className='uppercase font-bold'>Discription</label>
-                      <textarea name="discription" className='w-full rounded p-2 bg-transparent bg-orange-700  bg-opacity-50 outline-none  shadow-sm shadow-gray-700 max-h-40' ></textarea>
+                      <textarea name="discription" className='w-full rounded p-2 bg-transparent bg-orange-600  bg-opacity-50 outline-none  shadow-sm shadow-gray-700 max-h-40' ></textarea>
                     </div>
 
                     <div className='flex justify-end gap-3 items-center'>

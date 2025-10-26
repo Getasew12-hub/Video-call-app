@@ -48,7 +48,7 @@ useEffect(()=>{
     return ()=> {
         cancelded=true;
         if(streamClient){
-         client.disconnectUser()
+         streamClient.disconnectUser()
         }
        
     }

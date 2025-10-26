@@ -27,3 +27,16 @@ export const generateStrimToken=async (userid) => {
     return null;
   }
 }
+
+export const Addnewmember=async(user)=>{
+  console.log("the user id this",user)
+  try {
+    
+    const publicChannel=await client.queryChannels({channelType:"public"});
+    for(const channel of publicChannel){
+     await channel.addMembers([user])
+    }
+  } catch (error) {
+    console.log("error on add  new membe ",error)
+  }
+}
