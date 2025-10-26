@@ -16,7 +16,7 @@ const schema=new mongoose.Schema({
     },
     img:{
         type:String,
-       default:'',
+        required:true,
     },
 },{timestamps:true})
 

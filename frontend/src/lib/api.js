@@ -1,16 +1,18 @@
 import axios from "./axios"
 
 export const GetStremeToke=async () => {
+  
+        
      try {
         const respone=await axios.get("/chat/token");
-
+        
         return respone.data;
      } catch (error) {
         console.log("error on getstreme token",error);
 
         return null;
         
-     }
+     }j
 }
 export const GetAuthuser=async () => {
         try {

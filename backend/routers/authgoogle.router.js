@@ -27,9 +27,10 @@ router.get("/google/callback",passport.authenticate('google',{
   async function(accessToken, refreshToken, profile, cb) {
   
 const getuser=await  user.findOne({email:profile.emails[0].value});
+
 if(!getuser){
-    const newuser=await user.create({name:profile.displayName,email:profile.emails[0].value,password:'google'});
-    const userdata={name:newuser.name,id:newuser._id}
+    const newuser=await user.create({name:profile.displayName,email:profile.emails[0].value,password:'google',img:profile.photos[0].value});
+    const userdata={name:newuser.name,id:newuser._id,img:profile.photos[0].value}
     await userupsert(userdata)
   
     return cb(null,newuser)

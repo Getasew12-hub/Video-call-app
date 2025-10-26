@@ -1,16 +1,16 @@
 import {useQuery} from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { GetStremeToke } from "../lib/api";
+import { GetAuthuser, GetStremeToke } from "../lib/api";
 import {StreamChat} from "stream-chat"
 
 
-const STERM_API_KEY=import.meta.env.STRIM_API_KEY;
+const STERM_API_KEY="q7ycujjmw5ky";
 
-export const useSreameChat=async () => {
+export const useStreamChat= () => {
 const [streamClient,setStreamClien]=useState(null);
 let cancelded=false;
 
-const {data:user}=useQuery({queryKey:['auth']});
+const {data:user}= useQuery({queryKey:['auth'],queryFn:GetAuthuser});
 
 const {data:token,isLoading,error}=useQuery({
     queryKey:['streamtoken'],
@@ -53,6 +53,7 @@ useEffect(()=>{
        
     }
 },[user,token])
-
+console.log("i sloging ",isLoading)
+console.log("the strem chat is this ",streamClient)
  return {streamClient,isLoading,error}   
 }
