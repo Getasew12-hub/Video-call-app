@@ -17,8 +17,9 @@ export const userupsert=async (data) => {
 
 export const generateStrimToken=async (userid) => {
   try {
-    const id=userid.toSting()
+    const id=userid.toString();
     const token = client.createToken(id);
+  
     return token;
     
   } catch (error) {

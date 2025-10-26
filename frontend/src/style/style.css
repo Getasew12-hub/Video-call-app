@@ -1,0 +1,18 @@
+.create-channer_button{
+       
+      background: linear-gradient(to right,rgb(157, 54, 157) ,rgb(61, 3, 61),rgb(61, 3, 61));
+    background-size: 200% 100%;
+     transition: 1.5s linear;
+}
+
+.create-channer_button:hover{
+        transition: 1.5s linear;
+      background: linear-gradient(to  top right,rgb(157, 54, 157) ,rgb(61, 3, 61));
+    background-size: 200% 100%;
+    background-position:100% 0%;
+}
+.scrollbar::-webkit-scrollbar{
+    width: 0;
+    display:none;
+}
+
