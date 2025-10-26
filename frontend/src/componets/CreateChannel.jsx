@@ -52,11 +52,7 @@ console.log("the client is this and work propery",client)
 
   function togglemembers(id){
     if(selectedmembers.includes(id)){
-      setmembers((pre)=>{
-      if(pre!=id){
-     return pre;
-      }
-      })
+      setmembers((pre)=> pre.filter((val)=> val.id!=id))
     }else{
       setmembers([...selectedmembers,id])
     }

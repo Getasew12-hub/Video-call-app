@@ -22,12 +22,12 @@ import CreateChannel from '../componets/CreateChannel';
 
 
 function HomePage() {
-  const {data:user,isLoading:laod}=useQuery({queryKey:'auth',queryFn:GetAuthuser})
+  const {data:user,isLoading:laod}=useQuery({queryKey:['auth'],queryFn:GetAuthuser})
 const [ismodalOpen,setModalopen]=useState(false);
 const [activechannel,setActiveChannel]=useState(null);
 const [searchParams,setSearchParams]=useSearchParams();
 const {streamClient,isLoading,error}=useStreamChat();
-const data=useStreamChat()
+
 
 console.log("the strema is contian this thing and it must work as expected",streamClient)
 useEffect(()=>{
@@ -40,13 +40,11 @@ if(streamClient){
       setActiveChannel(channel);
     }
   }
-},[searchParams,activechannel])
+},[searchParams,streamClient])
 
 
-if(!streamClient || isLoading || laod) return <p className='text-black'>Loadding...</p>;
-if(error) return <p className='text-black'>Someting is went wrong</p>;
-  
-  return (
+if(!streamClient || isLoading) return <p className='text-black'>Loading...</p>;
+if(error) return <p className='text-black'>Something went wrong</p>;  return (
     <div className='p-5 flex   bg-gradient-to-br from-sky-900  to-purple-950 h-screen '>
 
       <div className='  flex-grow  rounded-xl shadow-md shadow-gray-700 flex  overflow-hidden  '>
@@ -60,8 +58,7 @@ if(error) return <p className='text-black'>Someting is went wrong</p>;
           <span className='font-bold text-3xl'>SLAP</span>
           </div>
           <div className='h-10 w-10 overflow-hidden rounded-full'>
-            <img src={user.img} alt="user profile"  className='h-full w-full object-cover' />
-          </div>
+            <img src={user?.img} alt="user profile"  className='h-full w-full object-cover' />          </div>
          </div>
            <div className='flex justify-center items-center mt-6'>
 

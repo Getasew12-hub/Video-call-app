@@ -52,8 +52,7 @@ useEffect(()=>{
         }
        
     }
-},[user,token])
-console.log("i sloging ",isLoading)
-console.log("the strem chat is this ",streamClient)
+}, [user, token, streamClient])
+
  return {streamClient,isLoading,error}   
 }
